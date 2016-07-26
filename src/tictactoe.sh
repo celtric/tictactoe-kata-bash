@@ -40,8 +40,8 @@ handleCommand() {
     y=${1:1:2}
     selectCell $x $y
     checkWinnner
-    switchPlayer
     printBoard
+    switchPlayer
 }
 
 selectCell() {
@@ -61,9 +61,17 @@ switchPlayer() {
 
 checkWinnner() {
     if [ ${row0[0]} = "X" ] && [ ${row0[1]} = "X" ] && [ ${row0[2]} = "X" ]; then
-        echo -e "\n${GREEN}X won, yay!$RESET"
-        exit 0
+        playerWon
+    elif [ ${row1[0]} = "X" ] && [ ${row1[1]} = "X" ] && [ ${row1[2]} = "X" ]; then
+        playerWon
+    elif [ ${row2[0]} = "X" ] && [ ${row2[1]} = "X" ] && [ ${row2[2]} = "X" ]; then
+        playerWon
     fi
+}
+
+playerWon() {
+    echo -e "\n${GREEN}X won, yay!$RESET"
+    exit 0
 }
 
 #---[ Main ]-------------------------------------------------------------------#
