@@ -13,7 +13,7 @@ assert_contains "src/tictactoe.sh exit" "
 |   |   |   |
 +---+---+---+
 "
-assert_end prints_empty_board
+assert_end "Prints an empty board"
 
 assert_contains "src/tictactoe.sh 00 exit" "
 +---+---+---+
@@ -24,4 +24,15 @@ assert_contains "src/tictactoe.sh 00 exit" "
 |   |   |   |
 +---+---+---+
 "
-assert_end accepts_input
+assert_end "Accepts user input"
+
+assert_contains "src/tictactoe.sh 00 01 02 10 exit" "
++---+---+---+
+| X | O | X |
++---+---+---+
+| O |   |   |
++---+---+---+
+|   |   |   |
++---+---+---+
+"
+assert_end "Alternates between two user inputs"

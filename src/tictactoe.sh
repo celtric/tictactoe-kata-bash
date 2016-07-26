@@ -4,6 +4,8 @@ declare -a row0=(" " " " " ")
 declare -a row1=(" " " " " ")
 declare -a row2=(" " " " " ")
 
+currentPlayer="X"
+
 #---[ Helpers ]----------------------------------------------------------------#
 
 RED='\033[1;31m'
@@ -37,11 +39,19 @@ handleCommand() {
     x=${1:0:1}
     y=${1:1:2}
     case $x in
-        0) row0[y]="X";;
-        1) row1[y]="X";;
-        2) row2[y]="X";;
+        0) row0[y]=${currentPlayer};;
+        1) row1[y]=${currentPlayer};;
+        2) row2[y]=${currentPlayer};;
     esac
+    switchPlayer
     printBoard
+}
+
+switchPlayer() {
+    case "$currentPlayer" in
+        "X") currentPlayer="O";;
+        *) currentPlayer="X" ;;
+    esac
 }
 
 #---[ Main ]-------------------------------------------------------------------#
@@ -53,6 +63,6 @@ for var in "$@"; do
 done
 
 while true; do
-    read -p "Player A, what's your move (xy)? " xy
+    read -p "Player ${currentPlayer}, what's your move (xy)? " xy
     handleCommand $xy
 done
