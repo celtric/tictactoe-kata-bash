@@ -83,9 +83,12 @@ checkWinnner() {
 }
 
 checkWinnerBySpecificCells() {
-    if [[ ${board[$1]} = ${currentPlayer} ]] && [[ ${board[$2]} = ${currentPlayer} ]] && [[ ${board[$3]} = ${currentPlayer} ]]; then
-        playerWon
-    fi
+    for i in "$@"; do
+        if [[ ${board[i]} != ${currentPlayer} ]]; then
+            return
+        fi
+    done
+    playerWon
 }
 
 checkNoMoreMoves() {
