@@ -67,23 +67,18 @@ switchPlayer() {
 }
 
 checkWinnner() {
-    if [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[1]} = ${currentPlayer} ]] && [[ ${board[2]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[3]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[5]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[6]} = ${currentPlayer} ]] && [[ ${board[7]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[3]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[1]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[7]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[5]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
-        playerWon
-    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
+    checkWinnerBySpecificCells 0 1 2
+    checkWinnerBySpecificCells 3 4 5
+    checkWinnerBySpecificCells 6 7 8
+    checkWinnerBySpecificCells 0 3 6
+    checkWinnerBySpecificCells 1 4 7
+    checkWinnerBySpecificCells 2 5 8
+    checkWinnerBySpecificCells 0 4 8
+    checkWinnerBySpecificCells 2 4 6
+}
+
+checkWinnerBySpecificCells() {
+    if [[ ${board[$1]} = ${currentPlayer} ]] && [[ ${board[$2]} = ${currentPlayer} ]] && [[ ${board[$3]} = ${currentPlayer} ]]; then
         playerWon
     fi
 }
