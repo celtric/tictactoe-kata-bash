@@ -33,17 +33,22 @@ handleCommand() {
     if [ $1 = "exit" ]; then
         bye
     fi
+
     row=${1:0:1}
     col=${1:2:3}
-    selectCell $row $col
+    boardKey=(row*3)+col
+
+    if [[ ${board[boardKey]} != " " ]]; then
+        printBoard
+        echo -e "${RED}Cell is already taken.$RESET\n"
+        return
+    fi
+
+    board[boardKey]=${currentPlayer}
     printBoard
     checkWinnner
     checkNoMoreMoves
     switchPlayer
-}
-
-selectCell() {
-    board[($1*3)+$2]=${currentPlayer}
 }
 
 switchPlayer() {

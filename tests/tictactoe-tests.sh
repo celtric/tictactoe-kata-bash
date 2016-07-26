@@ -54,3 +54,6 @@ assert_end "Considers a full diagonal as a winning move"
 
 assert_contains "src/tictactoe.sh 0,0 1,1 2,0 1,0 0,2 0,1 2,1 2,2 1,2" "A strange game"
 assert_end "Ends the game in more moves are available"
+
+assert_contains "src/tictactoe.sh 0,0 0,0 exit" "Cell is already taken"
+assert_end "Prevents cell from being used twice"
