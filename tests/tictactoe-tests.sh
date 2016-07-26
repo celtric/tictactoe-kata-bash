@@ -57,3 +57,8 @@ assert_end "Ends the game in more moves are available"
 
 assert_contains "src/tictactoe.sh 0,0 0,0 exit" "Cell is already taken"
 assert_end "Prevents cell from being used twice"
+
+assert_contains "src/tictactoe.sh 00 exit" "Invalid syntax"
+assert_contains "src/tictactoe.sh 3,0 exit" "Invalid syntax"
+assert_contains "src/tictactoe.sh 0,3 exit" "Invalid syntax"
+assert_end "Enforces input syntax"

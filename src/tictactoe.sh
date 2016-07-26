@@ -42,6 +42,13 @@ handleCommand() {
         bye
     fi
 
+    validSyntax='^[0-2]{1},[0-2]{1}$'
+    if ! [[ $1 =~ $validSyntax ]]; then
+        printBoard
+        echo -e "${RED}Invalid syntax. Example: to select the first cell, use 0,0$RESET\n"
+        return
+    fi
+
     row=${1:0:1}
     col=${1:2:3}
     boardKey=(row*3)+col
