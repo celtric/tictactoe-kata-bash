@@ -47,3 +47,7 @@ assert_contains "src/tictactoe.sh 0,0 0,1 1,0 1,1 2,0" "X won, yay!"
 assert_contains "src/tictactoe.sh 0,1 0,0 1,1 1,0 2,1" "X won, yay!"
 assert_contains "src/tictactoe.sh 0,2 0,0 1,2 1,0 2,2" "X won, yay!"
 assert_end "Considers a full column as a winning move"
+
+assert_contains "src/tictactoe.sh 0,0 0,1 1,1 0,2 2,2" "X won, yay!"
+assert_contains "src/tictactoe.sh 0,2 0,0 1,1 0,1 2,0" "X won, yay!"
+assert_end "Considers a full diagonal as a winning move"

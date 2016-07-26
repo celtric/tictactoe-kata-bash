@@ -70,6 +70,10 @@ checkWinnner() {
         playerWon
     elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[5]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
         playerWon
+    elif [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
+        playerWon
+    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
+        playerWon
     fi
 }
 
