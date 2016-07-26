@@ -38,13 +38,18 @@ handleCommand() {
     fi
     x=${1:0:1}
     y=${1:1:2}
-    case $x in
-        0) row0[y]=${currentPlayer};;
-        1) row1[y]=${currentPlayer};;
-        2) row2[y]=${currentPlayer};;
-    esac
+    selectCell $x $y
+    checkWinnner
     switchPlayer
     printBoard
+}
+
+selectCell() {
+    case $1 in
+        0) row0[$2]=${currentPlayer};;
+        1) row1[$2]=${currentPlayer};;
+        2) row2[$2]=${currentPlayer};;
+    esac
 }
 
 switchPlayer() {
@@ -52,6 +57,13 @@ switchPlayer() {
         "X") currentPlayer="O";;
         *) currentPlayer="X" ;;
     esac
+}
+
+checkWinnner() {
+    if [ ${row0[0]} = "X" ] && [ ${row0[1]} = "X" ] && [ ${row0[2]} = "X" ]; then
+        echo -e "\n${GREEN}X won, yay!$RESET"
+        exit 0
+    fi
 }
 
 #---[ Main ]-------------------------------------------------------------------#

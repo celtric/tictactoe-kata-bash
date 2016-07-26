@@ -36,3 +36,6 @@ assert_contains "src/tictactoe.sh 00 01 02 10 exit" "
 +---+---+---+
 "
 assert_end "Alternates between two user inputs"
+
+assert_contains "src/tictactoe.sh 00 10 01 11 02" "X won, yay!"
+assert_end "Considers a full row as a winning move"
