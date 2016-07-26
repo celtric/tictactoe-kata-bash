@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-declare -a row0=(" " " " " ")
-declare -a row1=(" " " " " ")
-declare -a row2=(" " " " " ")
+declare -a board=(
+    " " " " " "
+    " " " " " "
+    " " " " " "
+)
 
 currentPlayer="X"
 
@@ -23,11 +25,11 @@ bye() {
 printBoard() {
     echo -e "\033c"
     echo "+---+---+---+"
-    echo "| ${row0[0]} | ${row0[1]} | ${row0[2]} |"
+    echo "| ${board[0]} | ${board[1]} | ${board[2]} |"
     echo "+---+---+---+"
-    echo "| ${row1[0]} | ${row1[1]} | ${row1[2]} |"
+    echo "| ${board[3]} | ${board[4]} | ${board[5]} |"
     echo "+---+---+---+"
-    echo "| ${row2[0]} | ${row2[1]} | ${row2[2]} |"
+    echo "| ${board[6]} | ${board[7]} | ${board[8]} |"
     echo "+---+---+---+"
     echo ""
 }
@@ -39,17 +41,13 @@ handleCommand() {
     x=${1:0:1}
     y=${1:1:2}
     selectCell $x $y
-    checkWinnner
     printBoard
+    checkWinnner
     switchPlayer
 }
 
 selectCell() {
-    case $1 in
-        0) row0[$2]=${currentPlayer};;
-        1) row1[$2]=${currentPlayer};;
-        2) row2[$2]=${currentPlayer};;
-    esac
+    board[($1*3)+$2]=${currentPlayer}
 }
 
 switchPlayer() {
@@ -60,17 +58,17 @@ switchPlayer() {
 }
 
 checkWinnner() {
-    if [ ${row0[0]} = ${currentPlayer} ] && [ ${row0[1]} = ${currentPlayer} ] && [ ${row0[2]} = ${currentPlayer} ]; then
+    if [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[1]} = ${currentPlayer} ]] && [[ ${board[2]} = ${currentPlayer} ]]; then
         playerWon
-    elif [ ${row1[0]} = ${currentPlayer} ] && [ ${row1[1]} = ${currentPlayer} ] && [ ${row1[2]} = ${currentPlayer} ]; then
+    elif [[ ${board[3]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[5]} = ${currentPlayer} ]]; then
         playerWon
-    elif [ ${row2[0]} = ${currentPlayer} ] && [ ${row2[1]} = ${currentPlayer} ] && [ ${row2[2]} = ${currentPlayer} ]; then
+    elif [[ ${board[6]} = ${currentPlayer} ]] && [[ ${board[7]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
         playerWon
-    elif [ ${row0[0]} = ${currentPlayer} ] && [ ${row1[0]} = ${currentPlayer} ] && [ ${row2[0]} = ${currentPlayer} ]; then
+    elif [[ ${board[0]} = ${currentPlayer} ]] && [[ ${board[3]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
         playerWon
-    elif [ ${row0[1]} = ${currentPlayer} ] && [ ${row1[1]} = ${currentPlayer} ] && [ ${row2[1]} = ${currentPlayer} ]; then
+    elif [[ ${board[1]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[7]} = ${currentPlayer} ]]; then
         playerWon
-    elif [ ${row0[2]} = ${currentPlayer} ] && [ ${row1[2]} = ${currentPlayer} ] && [ ${row2[2]} = ${currentPlayer} ]; then
+    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[5]} = ${currentPlayer} ]] && [[ ${board[8]} = ${currentPlayer} ]]; then
         playerWon
     fi
 }
