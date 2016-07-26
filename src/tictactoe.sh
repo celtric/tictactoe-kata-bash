@@ -67,12 +67,17 @@ switchPlayer() {
 }
 
 checkWinnner() {
-    checkWinnerBySpecificCells 0 1 2
-    checkWinnerBySpecificCells 3 4 5
-    checkWinnerBySpecificCells 6 7 8
-    checkWinnerBySpecificCells 0 3 6
-    checkWinnerBySpecificCells 1 4 7
-    checkWinnerBySpecificCells 2 5 8
+    # Rows
+    for i in $(seq 0 2); do
+        checkWinnerBySpecificCells $i*3 $i*3+1 $i*3+2
+    done
+
+    # Columns
+    for i in $(seq 0 2); do
+        checkWinnerBySpecificCells $i $i+3 $i+6
+    done
+
+    # Diagonals
     checkWinnerBySpecificCells 0 4 8
     checkWinnerBySpecificCells 2 4 6
 }
