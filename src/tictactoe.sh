@@ -17,11 +17,6 @@ RESET='\033[0m'
 
 #---[ Functions ]--------------------------------------------------------------#
 
-bye() {
-    echo -e "\n${RED}Farewell, Professor Falken.$RESET"
-    exit 0
-}
-
 printBoard() {
     echo -e "\033c"
     echo "+---+---+---+"
@@ -43,6 +38,7 @@ handleCommand() {
     selectCell $row $col
     printBoard
     checkWinnner
+    checkNoMoreMoves
     switchPlayer
 }
 
@@ -74,11 +70,32 @@ checkWinnner() {
         playerWon
     elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
         playerWon
+    elif [[ ${board[2]} = ${currentPlayer} ]] && [[ ${board[4]} = ${currentPlayer} ]] && [[ ${board[6]} = ${currentPlayer} ]]; then
+        playerWon
     fi
 }
 
+checkNoMoreMoves() {
+    for i in "${board[@]}"; do
+        if [ "$i" = " " ]; then
+            return
+        fi
+    done
+    noOneWon
+}
+
 playerWon() {
-    echo -e "\n${GREEN}$currentPlayer won, yay!$RESET"
+    echo -e "${GREEN}$currentPlayer won, yay!$RESET\n"
+    exit 0
+}
+
+noOneWon() {
+    echo -e "${RED}A strange game. The only winning move is not to play. How about a nice game of chess?$RESET\n"
+    exit 0
+}
+
+bye() {
+    echo -e "\n${RED}Farewell, Professor Falken.$RESET"
     exit 0
 }
 
