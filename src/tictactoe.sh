@@ -19,14 +19,22 @@ RESET='\033[0m'
 
 printBoard() {
     echo -e "\033c"
-    echo "+---+---+---+"
-    echo "| ${board[0]} | ${board[1]} | ${board[2]} |"
-    echo "+---+---+---+"
-    echo "| ${board[3]} | ${board[4]} | ${board[5]} |"
-    echo "+---+---+---+"
-    echo "| ${board[6]} | ${board[7]} | ${board[8]} |"
-    echo "+---+---+---+"
+    for row in $(seq 0 2); do
+        printBoardRowSeparator
+        for col in $(seq 0 2); do
+            printf "| ${board[$(((row*3)+col))]} "
+        done
+        echo "|"
+    done
+    printBoardRowSeparator
     echo ""
+}
+
+printBoardRowSeparator() {
+    for col in $(seq 0 2); do
+        printf "+---"
+    done
+    echo "+"
 }
 
 handleCommand() {
