@@ -4,7 +4,7 @@ set -e
 
 . tests/utils/assert.sh
 
-assert_contains "src/tictactoe.sh" "
+assert_contains "src/tictactoe.sh exit" "
 +---+---+---+
 |   |   |   |
 +---+---+---+
@@ -15,7 +15,7 @@ assert_contains "src/tictactoe.sh" "
 "
 assert_end prints_empty_board
 
-assert_contains "src/tictactoe.sh 00" "
+assert_contains "src/tictactoe.sh 00 exit" "
 +---+---+---+
 | X |   |   |
 +---+---+---+

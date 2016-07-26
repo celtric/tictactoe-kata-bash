@@ -27,9 +27,13 @@ printBoard() {
     echo "+---+---+---+"
     echo "| ${row2[0]} | ${row2[1]} | ${row2[2]} |"
     echo "+---+---+---+"
+    echo ""
 }
 
 handleCommand() {
+    if [ $1 = "exit" ]; then
+        bye
+    fi
     x=${1:0:1}
     y=${1:1:2}
     case $x in
@@ -38,19 +42,17 @@ handleCommand() {
         2) row2[y]="X";;
     esac
     printBoard
-    bye
 }
 
 #---[ Main ]-------------------------------------------------------------------#
 
 printBoard
 
-handleCommand $1
+for var in "$@"; do
+    handleCommand "$var"
+done
 
 while true; do
-    read -p "Player A, what's your move (x y)? " xy
-    case $xy in
-        "exit") bye
-        *) printBoard
-    esac
+    read -p "Player A, what's your move (xy)? " xy
+    handleCommand $xy
 done
