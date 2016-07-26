@@ -66,6 +66,12 @@ checkWinnner() {
         playerWon
     elif [ ${row2[0]} = ${currentPlayer} ] && [ ${row2[1]} = ${currentPlayer} ] && [ ${row2[2]} = ${currentPlayer} ]; then
         playerWon
+    elif [ ${row0[0]} = ${currentPlayer} ] && [ ${row1[0]} = ${currentPlayer} ] && [ ${row2[0]} = ${currentPlayer} ]; then
+        playerWon
+    elif [ ${row0[1]} = ${currentPlayer} ] && [ ${row1[1]} = ${currentPlayer} ] && [ ${row2[1]} = ${currentPlayer} ]; then
+        playerWon
+    elif [ ${row0[2]} = ${currentPlayer} ] && [ ${row1[2]} = ${currentPlayer} ] && [ ${row2[2]} = ${currentPlayer} ]; then
+        playerWon
     fi
 }
 
