@@ -60,17 +60,17 @@ switchPlayer() {
 }
 
 checkWinnner() {
-    if [ ${row0[0]} = "X" ] && [ ${row0[1]} = "X" ] && [ ${row0[2]} = "X" ]; then
+    if [ ${row0[0]} = ${currentPlayer} ] && [ ${row0[1]} = ${currentPlayer} ] && [ ${row0[2]} = ${currentPlayer} ]; then
         playerWon
-    elif [ ${row1[0]} = "X" ] && [ ${row1[1]} = "X" ] && [ ${row1[2]} = "X" ]; then
+    elif [ ${row1[0]} = ${currentPlayer} ] && [ ${row1[1]} = ${currentPlayer} ] && [ ${row1[2]} = ${currentPlayer} ]; then
         playerWon
-    elif [ ${row2[0]} = "X" ] && [ ${row2[1]} = "X" ] && [ ${row2[2]} = "X" ]; then
+    elif [ ${row2[0]} = ${currentPlayer} ] && [ ${row2[1]} = ${currentPlayer} ] && [ ${row2[2]} = ${currentPlayer} ]; then
         playerWon
     fi
 }
 
 playerWon() {
-    echo -e "\n${GREEN}X won, yay!$RESET"
+    echo -e "\n${GREEN}$currentPlayer won, yay!$RESET"
     exit 0
 }
 
