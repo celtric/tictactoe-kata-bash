@@ -44,8 +44,7 @@ handleCommand() {
 
     validSyntax='^[0-2]{1},[0-2]{1}$'
     if ! [[ $1 =~ $validSyntax ]]; then
-        printBoard
-        echo -e "${RED}Invalid syntax. Example: to select the first cell, use 0,0$RESET\n"
+        recoverableError "Invalid syntax. Example: to select the first cell, use 0,0"
         return
     fi
 
@@ -54,8 +53,7 @@ handleCommand() {
     boardKey=(row*3)+col
 
     if [[ ${board[boardKey]} != " " ]]; then
-        printBoard
-        echo -e "${RED}Cell is already taken.$RESET\n"
+        recoverableError "Cell is already taken."
         return
     fi
 
@@ -105,6 +103,11 @@ checkNoMoreMoves() {
         fi
     done
     noOneWon
+}
+
+recoverableError() {
+    printBoard
+    echo -e "${RED}$1$RESET\n"
 }
 
 playerWon() {
