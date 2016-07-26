@@ -38,9 +38,9 @@ handleCommand() {
     if [ $1 = "exit" ]; then
         bye
     fi
-    x=${1:0:1}
-    y=${1:1:2}
-    selectCell $x $y
+    row=${1:0:1}
+    col=${1:2:3}
+    selectCell $row $col
     printBoard
     checkWinnner
     switchPlayer
@@ -87,6 +87,6 @@ for var in "$@"; do
 done
 
 while true; do
-    read -p "Player ${currentPlayer}, what's your move (xy)? " xy
-    handleCommand $xy
+    read -p "Player ${currentPlayer}, what's your move (row,column)? " rc
+    handleCommand $rc
 done
